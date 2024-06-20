@@ -1,0 +1,26 @@
+{
+  "name": "web_crawler",
+  "version": "1.0.0",
+  "description": "Web crawler project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "jest": {
+  "transform": {}
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmilasin/web_crawler.git"
+  },
+  "author": "Vladimir Milasinovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vmilasin/web_crawler/issues"
+  },
+  "homepage": "https://github.com/vmilasin/web_crawler#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
