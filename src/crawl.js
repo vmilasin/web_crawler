@@ -48,8 +48,46 @@ function getURLsFromHTML(htmlBody, baseURL) {
     }
 
 
+async function crawlPage(currentURL) {
+    urlList = {}
+    console.log(`Actively crawling: ${currentURL}`);
+
+    try {
+        const request = await fetch(currentURL);
+
+        if (request.status > 399) {
+            console.log(`Error in fetch on page: ${currentURL} with status code: ${request.status}`)
+            return
+        };
+
+        const contentType = request.headers.get("content-type")
+        if (!contentType.includes("text/html")) {
+            console.log(`Non-HTML response on page: ${currentURL}. Received type: ${contentType}`)
+            return
+        };
+
+    } catch (err) {
+        console.log(err.message)
+    };
+    const request = await fetch(currentURL);
+    const response = await request.text()
+
+    const extractedLinks = getURLsFromHTML(response, currentURL)
+    for (const link of extractedLinks) {
+        if (link in urlList) {
+            urlList[link] += 1
+        } else {
+            urlList[link] = 1
+        }
+    }
+    
+    
+    console.log(urlList)
+}
+
 
 module.exports = {
     normalizeURL,
-    getURLsFromHTML
+    getURLsFromHTML,
+    crawlPage
 };

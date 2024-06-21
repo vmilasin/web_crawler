@@ -1,6 +1,5 @@
-const {normalizeURL} = require('../src/crawl')
+const {normalizeURL, getURLsFromHTML, crawlPage} = require('../src/crawl')
 const {test, expect} = require('@jest/globals')
-const {getURLsFromHTML} = require('../src/crawl')
 
 test('normalizeURL - strip protocol', () => {
     const input = 'https://maps.google.com';
@@ -85,3 +84,6 @@ test('getURLsFromHTML - invalid', () => {
     const baseURL = 'https://www.google.com'
     expect(() => {getURLsFromHTML(htmlBody, baseURL)}).toThrow(TypeError('Invalid URL'));
 });
+
+
+
