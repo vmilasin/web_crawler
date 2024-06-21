@@ -8,7 +8,7 @@
     "test": "jest"
   },
   "jest": {
-  "transform": {}
+    "transform": {}
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "homepage": "https://github.com/vmilasin/web_crawler#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.0"
   }
 }
