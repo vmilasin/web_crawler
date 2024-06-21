@@ -1,6 +1,7 @@
 async function main() {
     const readline = require('node:readline');
     const {crawlPage} = require('./src/crawl');
+    const {printReport} = require('./src/report');
 
     /*const rl = readline.createInterface({
         input: process.stdin,
@@ -25,7 +26,9 @@ async function main() {
     };
 
     const baseURL = process.argv[2]
-    return crawlPage(baseURL, baseURL, {})
+    
+    const pages = await crawlPage(baseURL, baseURL, {})
+    printReport(pages)
 
     
     
