@@ -1,4 +1,4 @@
-function main() {
+async function main() {
     const readline = require('node:readline');
     const {crawlPage} = require('./src/crawl');
 
@@ -25,7 +25,7 @@ function main() {
     };
 
     const baseURL = process.argv[2]
-    return crawlPage(baseURL)
+    return crawlPage(baseURL, baseURL, {})
 
     
     
