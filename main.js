@@ -1,48 +1,30 @@
-async function main() {
-    const readline = require('node:readline');
-    const {crawlPage} = require('./src/crawl');
-    const {printReport} = require('./src/report');
-
-    /*const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
-    
-    rl.question('Please enter a URL to crawl through:', inputURL => {
-        console.log(`Stating crawl of ${baseURL}`);
-        rl.close();
-    });*/
-
-    /* Node is always the first argument,
-    the script file being run is the second,
-    provided arguments are third */
-    if (process.argv.length < 3) {
-        console.log("No website provided.");
-        process.exit(1);
-    };
-    if (process.argv.length > 3) {
-        console.log('Please enter only 1 website');
-        process.exit(1);
-    };
-
-    const baseURL = process.argv[2]
-    
-    const pages = await crawlPage(baseURL, baseURL, {})
-    printReport(pages)
+const readline = require('node:readline');
+const {crawlPage} = require('./src/crawl');
+const {printReport} = require('./src/report');
 
     
-    
-    
+// Create a readline interface to ask the user for a URL when starting the application
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
 
-    //console.log(crawlPage('https://wagslane.dev/garbagepath'))
-
-
+// Function to ask the user for an URL input
+function getBaseURLFromInput(query){ 
+    return new Promise(resolve => rl.question(query, resolve));
 }
 
 
+async function main() {  
+    // Call the getBaseURLFromInput to get a URL to crawl through and bind it to a baseURL parameter
+    const baseURL = await getBaseURLFromInput("Please enter a valid URL to crawl through: ")
+    // Close the readline when a URL is provided
+    rl.close();
+
+    // Get a list of pages and their counters
+    const pages = await crawlPage(baseURL, baseURL, {})
+    // Print a report for the crawled page
+    printReport(pages)
+}
+
 main()
-
-
-
-
-
